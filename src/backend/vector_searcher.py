@@ -16,19 +16,15 @@ class VectorSearcher:
     Perform a vectorized search on the database, returning k-nearest neighbors.
     Collection must have a field called "plot_embedding" that contains the embedding of the course.
     """
-    def __init__(self, db_uri:str, db_name:str, collection_name:str):
+    def __init__(self, db_uri:str):
         """
-        db name corresponds to school, collection_name corresponds to semester
+        db name corresponds to school
         """
         self.mongo_client = get_mongodb_client(db_uri)
         if self.mongo_client is None:
             raise Exception("Failed to connect to MongoDB Atlas")
-            return
-        # Get the database and collection
-        self.db = self.mongo_client[db_name]
-        self.collection = self.db[collection_name]
         
-    def match(self, search_prompt:str, num_return:int) -> list[dict]:
+    def match(self, db_name:str, collection_name:str, search_prompt:str, num_return:int) -> list[dict]:
         """
         Perform a vectorized search of a course in the database.
         search_prompt: the prompt to search for, in natural language or keywords.
@@ -54,5 +50,5 @@ class VectorSearcher:
                  "$project": {"_id":0, "plot_embedding":0}
             }
         ]
-        results = self.collection.aggregate(aggregate_scheme)
+        results = self.mongo_client[db_name][collection_name].aggregate(aggregate_scheme)
         return list(results)

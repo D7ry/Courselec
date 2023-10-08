@@ -1,3 +1,4 @@
+import os
 from course_advisor import CourseAdvisor
 
 # a demo doing query on berkeley database
@@ -7,12 +8,12 @@ if __name__ == "__main__":
     COLLECTION_NAME:str  = "COURSES_SP_24"
     NUM_RETURN:int = 50 # number of courses to return
     
-    advisor = CourseAdvisor(school_db_id=DB_NAME, academic_phase_collection_id=COLLECTION_NAME)
+    advisor = CourseAdvisor()
     
     while 1:
         print("Enter a search prompt: ")
         prompt = input()
-        res = advisor.query(prompt)
+        res = advisor.query(prompt, DB_NAME, COLLECTION_NAME)
         
         for one_course in res[0:20]:
             print(one_course['code'])
