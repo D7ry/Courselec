@@ -33,12 +33,13 @@ function App() {
       <header className="App-header">
         <p>I am interested in studying... </p>
         <input
+        class="apple-input"
           type="text"
           placeholder="Computer Science"
           value={study_subject}
           onChange={(e) => set_study_subject(e.target.value)}
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <button class="apple-button" onClick={handleSubmit}>Submit</button>
 
         <div className="box-container">
           {loading ? (
@@ -46,7 +47,7 @@ function App() {
           ) : (
             subJsons.map((subJson) => (
               <div key={subJson.id} className="box">
-                <div className="box-content">{subJson.code}</div>
+                <div className="box-content">{subJson.code} <br></br>{subJson.description}</div>
               </div>
             ))
           )}
