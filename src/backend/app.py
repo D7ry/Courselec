@@ -1,5 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from course_advisor import CourseAdvisor
+
+course_advisor = CourseAdvisor()
 app = Flask(__name__)
 CORS(app)
 
@@ -29,17 +32,14 @@ def get_data():
 @app.route('/course_advisor/query/', methods=['GET'])
 def query_advisor():
     param = request.args.get('param')
-    # Sample data as a list of dictionaries
-    data = [
-        {'id': 1, 'name': 'Item 4'},
-        {'id': 2, 'name': 'Item 5'},
-        {'id': 3, 'name': 'Item 6'}
-    ]
-
-    from time import sleep
-    sleep(0.5)
+    
+    DB_NAME:str = "BERKELEY_COURSES"
+    COLLECTION_NAME:str  = "COURSES_SP_24"
+    
+    query_result = course_advisor.query(param, DB_NAME, COLLECTION_NAME)
+    
     # Return the data as a JSON response
-    return jsonify(data)
+    return jsonify(query_result)
 
 if __name__ == "__main__":
     app.run(debug=True)

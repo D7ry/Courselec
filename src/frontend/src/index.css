@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Styles for the box container */
+.box-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+/* Styles for individual boxes */
+.box {
+  width: calc(33.33% - 10px); /* Three boxes per row on wider screens */
+  background-color: #2ee2dcb5;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+/* Media query for responsive layout */
+@media (max-width: 768px) {
+  .box {
+    width: calc(50% - 10px); /* Two boxes per row on narrower screens */
+  }
+}

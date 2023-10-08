@@ -40,16 +40,17 @@ function App() {
         />
         <button onClick={handleSubmit}>Submit</button>
 
-        {/* Display the subJsons data */}
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          subJsons.map((subJson) => (
-            <div key={subJson.id} className="sticky-tab">
-              {subJson.name}
-            </div>
-          ))
-        )}
+        <div className="box-container">
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            subJsons.map((subJson) => (
+              <div key={subJson.id} className="box">
+                <div className="box-content">{subJson.code}</div>
+              </div>
+            ))
+          )}
+        </div>
       </header>
     </div>
   );
