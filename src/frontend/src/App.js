@@ -1,40 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
 
-console.log("here")
 function App() {
-  const [message, setMessage] = useState('');
+  const [study_subject, set_study_subject] = useState("");
 
-  console.log("here")
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('http://127.0.0.1:5000/data/'); // Use a relative URL or configure the base URL
-          console.log(response);
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          console.log(response);
-          const data = await response.json();
-          console.log(data)
-          setMessage(data.message);
-        } catch (error) {
-          console.error('Error:', error);
-          // You can add error handling here, like setting an error state or showing a message to the user.
-        }
-      };
-    
-      fetchData();
-    
-      return () => {
-        // If cleanup is needed when the component unmounts, you can define it here.
-      };
-    }, []); // Empty dependency array for a one-time effect
+  const handleSubmit = () => {
+    // Send the inputValue to the Flask backend
+    fetch(`http://127.0.0.1:5000/course_advisor/query?param=${study_subject}`, {
+      method: 'GET'
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Response from Flask backend:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>Message : {message}</p>
+        <p>I am interested in studying... </p>
+        <input
+          type="text"
+          placeholder="Computer Science"
+          value={study_subject}
+          onChange={(e) => set_study_subject(e.target.value)}
+        />
+        <button onClick={handleSubmit}>Submit</button>
       </header>
     </div>
   );

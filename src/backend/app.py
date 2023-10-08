@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -25,6 +25,20 @@ def get_data():
     
     # Return the data as JSON
     return jsonify(data)
+
+@app.route('/course_advisor/query/', methods=['GET'])
+def query_advisor():
+    param = request.args.get('param')
+    ret = {
+        "param" : param,
+        "values" :
+            [
+                "CS 101",
+                "CS 102",
+                "CS 103"
+            ]
+    }
+    return jsonify(ret)
 
 if __name__ == "__main__":
     app.run(debug=True)
