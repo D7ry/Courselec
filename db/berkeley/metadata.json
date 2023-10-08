@@ -1,0 +1,9 @@
+{
+    "school_name" : "UC Berkeley",
+    "semesters" : {
+        "Spring 2024" : "COURSES_SP_24"
+    },
+    "db_name": "BERKELEY_COURSES",
+    "email_domain": ["berkeley.edu"],
+    "filter_keywords": ["undergraduate", "graduate"]
+}

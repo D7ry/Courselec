@@ -1,0 +1,8 @@
+{
+    "school_name" : "UCLA",
+    "semesters" : {
+        "Spring 2024" : "SP24",
+        "Fall 2024" : "FA24"
+    },
+    "db_name": "UCLA_COURSES"
+}
