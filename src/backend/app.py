@@ -29,16 +29,17 @@ def get_data():
 @app.route('/course_advisor/query/', methods=['GET'])
 def query_advisor():
     param = request.args.get('param')
-    ret = {
-        "param" : param,
-        "values" :
-            [
-                "CS 101",
-                "CS 102",
-                "CS 103"
-            ]
-    }
-    return jsonify(ret)
+    # Sample data as a list of dictionaries
+    data = [
+        {'id': 1, 'name': 'Item 4'},
+        {'id': 2, 'name': 'Item 5'},
+        {'id': 3, 'name': 'Item 6'}
+    ]
+
+    from time import sleep
+    sleep(0.5)
+    # Return the data as a JSON response
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)
