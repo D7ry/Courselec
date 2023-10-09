@@ -8,7 +8,13 @@ function App() {
 
   const [loading, set_loading] = useState(false);
 
+  const [study_subejct_has_input, set_study_subject_has_input] = useState(false); // This is used to check if the user has entered a subject
+
   const handleSubmit = () => {
+    if (!study_subejct_has_input) {
+      alert("Please enter a subject");
+      return;
+    }
     set_loading(true);
     // Send the inputValue to the Flask backend
     fetch(`http://127.0.0.1:5000/course_advisor/query?param=${study_subject}`, {
@@ -37,8 +43,11 @@ function App() {
           type="text"
           placeholder="Computer Science"
           value={study_subject}
-          onChange={(e) => set_study_subject(e.target.value)}
-        />
+            onChange={(e) => {
+              set_study_subject(e.target.value);
+              set_study_subject_has_input(true);
+            }}
+          />
         <button class="apple-button" onClick={handleSubmit}>Submit</button>
 
         <div className="box-container">
