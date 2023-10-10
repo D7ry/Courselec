@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import {signInWithGoogle} from "./firebase"
 
 function App() {
   const [study_subject, set_study_subject] = useState("");
@@ -37,6 +38,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <button onClick={signInWithGoogle}>Click here to Sign in</button>
+        <h1>hi {localStorage.getItem("name")}</h1>
+        <img src={localStorage.getItem("profilePic")}></img>
         <p>I am interested in studying... </p>
         <input
         class="apple-input"
